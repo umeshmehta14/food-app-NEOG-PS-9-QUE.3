@@ -13,7 +13,7 @@ function App() {
   const {loading, error} = useContext(DataContext);
   return (
     <>
-      {loading ? "Loading..." :<><Header/>
+      {loading ? "Loading..." : <> { !error && <Header/>}
       <Routes>
         {error ? <Route path="/" element={<Error/>}/>:<Route path="/" element={<Home/>}/>   }
         <Route path="/menu" element={<Menu/>}/>
