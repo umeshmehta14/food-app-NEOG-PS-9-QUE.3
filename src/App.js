@@ -1,24 +1,25 @@
-import logo from './logo.svg';
+
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Home from './Pages/Home';
+import Menu from './Pages/Menu';
+import Cart from './Pages/Cart';
+import Header from './Components/Header';
+import { useContext } from 'react';
+import { DataContext } from './Contexts/DataProvider';
+import Error from './Pages/Error';
 
 function App() {
+  const {loading, error} = useContext(DataContext);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {loading ? "Loading..." :<><Header/>
+      <Routes>
+        {error ? <Route path="/" element={<Error/>}/>:<Route path="/" element={<Home/>}/>   }
+        <Route path="/menu" element={<Menu/>}/>
+        <Route path="/cart" element={<Cart/>}/>
+      </Routes></>}
+    </>
   );
 }
 

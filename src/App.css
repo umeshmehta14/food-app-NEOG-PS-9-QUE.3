@@ -1,38 +1,130 @@
-.App {
-  text-align: center;
+*{
+    box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+    background-color: rgb(246 246 246);
+    padding: 0px;
+    margin: 0px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+nav{
+    background-color: #7E57C2;
+    padding: 8px;
+    margin: 0px;
+    margin-bottom: 15px;
+    box-shadow: 1px 1px 10px purple;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+h1{
+    margin: 12px;
 }
 
-.App-link {
-  color: #61dafb;
+nav ul{
+    list-style: none;
+    display: flex;
+    margin: 0px;
+
+    justify-content: space-evenly;
+    font-size: 24px;
+}
+li a, .goTo-btn{
+    color: white;
+    text-decoration: none;
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.search{
+    padding: 8px;
+    border-radius: 20px;
+    border: none;
+    background-color: white;
+    box-shadow: 1px 2px 3px black;
+    color: gray;
+    font-weight: bold;
+}
+
+.search:focus{
+    outline: 2px solid purple;
+}
+.container{
+    width: 90%;
+    margin: auto;
+}
+
+.home{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home .btn{
+    width: 20%;
+}
+
+.menu-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: auto;
+}
+.menu-box{
+    width:20%;
+    box-shadow: 2px 2px 7px #607D8B;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    justify-content: center;
+    margin: 1rem;
+    border-radius: 15px;
+    background-color: aliceblue;
+    min-width: 185px;
+    max-width: 230px;
+}
+.menu-box img{
+    width: 100%;
+    height: 60%;
+    max-width: 165px;
+    max-height: 155px;
+    min-height: 155px;
+    margin: auto;
+    border-radius: 100%;
+}
+
+.filter-box{
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn{
+    width: 60%;
+    padding: 7px;
+    margin: auto;
+    border-radius: 12px;
+    background-color: #7E57C2;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover{
+    background-color: #7e57c2ca;
+
+}
+
+.goTo-btn{
+    color: white;
+    text-decoration: none;
+}
+
+.coupon{
+    width: fit-content;
+    padding: 10px;
+}
+
+.coupon[disabled] {
+    background-color: gray;
+    cursor:not-allowed;
 }
