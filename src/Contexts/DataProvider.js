@@ -1,72 +1,74 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useReducer, useState } from 'react'
 import { fakeFetch } from '../Data/Data';
 
 export const DataContext = createContext();
 
-export const DataProvider = ({children}) => {
-    const [menuItem, setMenuItem] = useState([]);
-    const [menu, setMenu] = useState([]);
-    const [searchValue, setSearchValue] = useState();
-    const [checkBoxValue, setCheckBoxValue] = useState();
+const DataReducer = (state,action)=>{
+    switch(action.type)
+    {
+        case "videoList" :
+            return {...state, videoList: action.payload}
+        case "loading":
+            return {...state, loading: action.payload}
+        case "error":
+            return {...state, error: action.payload}
+        default:
+            return;
+    }
 
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+}
+
+export const DataProvider = ({children}) => {
+    const [state, dispatch] = useReducer(DataReducer, {videoList:[], loading: true, error: false});
+    const {videoList} = state;
+    // const [videoList, setVideoList] = useState([]);
+
+    // const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState(false);
     const getData= async ()=>{
         try {
-            const response = await fakeFetch("https://example.com/api/menu");
-            setMenuItem(response.data.menu);
-            setMenu(response.data.menu);
-            setLoading(false);
+            const response = await fakeFetch("https://example.com/api/videos");
+            dispatch({type:"videoList", payload: response.data.videos})
+            dispatch({type:"loading", payload: false})
+            // setVideoList(response.data.videos);
+            // setLoading(false);
 
         } catch (err) {
-            setError(err);
-            setLoading(false);
+            dispatch({type:"error", payload: err})
+            dispatch({type:"loading", payload: false})
+            // setError(err);
+            // setLoading(false);
         }
     }
 
-    const HandleSearch = (event) =>{
-        const searchedItem = event.target.value;
-        setSearchValue(searchedItem);
-        if(searchedItem !== '')
+    const LikeHandler = (item,remove) =>{
+        let LikeData = [];
+        if(remove)
         {
-            setMenuItem(()=> menuItem.filter((item)=> item.name.toLowerCase().includes(searchedItem.toLowerCase())));
+            LikeData = videoList.map((element)=> element.id === item ? {...element, isLike: false} : element)
         }
         else{
-            setMenuItem(menu);
+            LikeData = videoList.map((element)=> element.id === item ? {...element, isLike: (!element.isLike || true)} : element)
         }
+        dispatch({type:"videoList", payload:LikeData});
     }
-
-    const HandleSort = (event) =>{
-        setMenuItem(()=> [...menuItem].sort((a,b)=> event.target.value === "LowToHigh" ?a.price - b.price : b.price - a.price));
-    }
-
-    const HandleCheck = (event) =>{
-        const checkValue = event.target.value;
-        const isChecked = event.target.checked;
-        setCheckBoxValue(checkValue);
-        if(isChecked){
-            setMenuItem(()=> menuItem.filter(({is_vegetarian,is_spicy})=> checkValue === "veg"? is_vegetarian: is_spicy ))
+    const WatchListHandler = (item,remove) =>{
+        let WatchLaterData = []; 
+        if(remove)
+        {
+             WatchLaterData = videoList.map((element)=> element.id === item ? {...element, is_watchLater: false} : element)
         }
         else{
-            setMenuItem(menu);
+            WatchLaterData = videoList.map((element)=> element.id === item ? {...element, is_watchLater: true} : element)
         }
-    }
-    const HandleCart = (item)=>{
-        const cartItem = menu.map((element)=> element.id === item.id ? {...element, inCart: true}:element)
-        setMenuItem(cartItem);
-        setMenu(cartItem);
-    }
+        dispatch({type:"videoList", payload:WatchLaterData});
 
-    const RemoveFromCart = (id)=>{
-        const itemRemovedData = menu.map((element)=> element.id === id ? {...element, inCart:false}: element )
-        setMenuItem(itemRemovedData);
-        setMenu(itemRemovedData);
     }
     useEffect(()=>{
         getData()
     },[])
   return (
-    <DataContext.Provider value={{menuItem,loading, error,HandleSearch,searchValue,HandleSort,HandleCheck,checkBoxValue,HandleCart,RemoveFromCart}}>
+    <DataContext.Provider value={{state,LikeHandler,WatchListHandler}}>
       {children}
     </DataContext.Provider>
   )

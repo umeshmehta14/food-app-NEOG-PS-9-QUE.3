@@ -3,18 +3,19 @@
 }
 
 body{
-    background-color: rgb(246 246 246);
+    background-color: rgb(96,96,96);
     padding: 0px;
     margin: 0px;
+    
 }
 
 
 nav{
-    background-color: #7E57C2;
+    background-color: #383838;
     padding: 8px;
     margin: 0px;
     margin-bottom: 15px;
-    box-shadow: 1px 1px 10px purple;
+    box-shadow: 1px 1px 10px rgb(50, 44, 50);
 }
 
 h1{
@@ -46,7 +47,7 @@ li a, .goTo-btn{
 }
 
 .search:focus{
-    outline: 2px solid purple;
+    outline: 2px solid rgb(51, 45, 51);
 }
 .container{
     width: 90%;
@@ -55,8 +56,15 @@ li a, .goTo-btn{
 
 .home{
     display: flex;
+    width: 100%;
+    height: 100vh;
     flex-direction: column;
     align-items: center;
+    background: url("https://tse4.explicit.bing.net/th?id=OIP.YUXZz3iw_Hg2wpb_vlZgsgHaEK&pid=Api&P=0");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: 0.8;
 }
 
 .home .btn{
@@ -71,14 +79,14 @@ li a, .goTo-btn{
 }
 .menu-box{
     width:20%;
-    box-shadow: 2px 2px 7px #607D8B;
+    box-shadow: 2px 2px 7px	#303030;
     display: flex;
     flex-direction: column;
     padding: 10px;
     justify-content: center;
     margin: 1rem;
     border-radius: 15px;
-    background-color: aliceblue;
+    background-color: #DCDCDC;
     min-width: 185px;
     max-width: 230px;
 }
@@ -89,7 +97,6 @@ li a, .goTo-btn{
     max-height: 155px;
     min-height: 155px;
     margin: auto;
-    border-radius: 100%;
 }
 
 .filter-box{
@@ -100,9 +107,9 @@ li a, .goTo-btn{
 .btn{
     width: 60%;
     padding: 7px;
-    margin: auto;
+    margin: 4px auto;
     border-radius: 12px;
-    background-color: #7E57C2;
+    background-color: #383838;
     color: white;
     font-weight: bold;
     border: none;
@@ -110,7 +117,7 @@ li a, .goTo-btn{
 }
 
 .btn:hover{
-    background-color: #7e57c2ca;
+    background-color: #383838ca;
 
 }
 
@@ -127,4 +134,28 @@ li a, .goTo-btn{
 .coupon[disabled] {
     background-color: gray;
     cursor:not-allowed;
+}
+
+.ind-videoContainer{
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    margin: auto;
+}
+.indb-box{
+    width:40%;
+    box-shadow: 2px 2px 7px #303030;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    justify-content: center;
+    height: 90vh;
+    margin: 1rem;
+    border-radius: 15px;
+    background-color: #DCDCDC;
+}
+.indb-box img{
+    width: 100%;
+    height: 65%;
 }
