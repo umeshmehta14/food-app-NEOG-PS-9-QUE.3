@@ -5,7 +5,7 @@ const Error = () => {
   const {error} = useContext(DataContext);
   return (
     <div className='home'>
-      <h1>{error.status}</h1>
+      <h1>{error.status}{""}</h1>
       <p>{error.message}</p>
     </div>
   )
